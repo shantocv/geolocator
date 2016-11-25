@@ -1,0 +1,6 @@
+<h3>Nearby places</h3>
+<ul>
+<% for place in @place.nearbys(15) %>
+  <li><%= link_to place.address, place %> (<%= place.distance.round(2) %> miles)</li>
+<% end %>
+</ul>

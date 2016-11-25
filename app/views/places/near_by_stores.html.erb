@@ -1,0 +1,40 @@
+<h4><a href="/places">Places</a></h4>
+<input type="button" name="near_by_stores" id="near_by_stores" value="Near By Stores!">
+<div id="stores">
+
+</div>
+
+<script>
+
+$(document).ready(function(){
+
+  $("#near_by_stores").click(function(){
+
+    if (navigator){
+      navigator.geolocation.getCurrentPosition(function(position){
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        console.log(latitude);
+        console.log(longitude);
+        $.ajax({
+          type: "POST",
+          url: "find_near_by_stores",
+          data: {latitude: latitude, longitude: longitude},
+          dataType: "html",
+          success: function(result){
+            $("#stores").html(result);
+          },
+          error: function(){
+
+          }
+        });
+      });
+    }else{
+      var latitude = '';
+      var longitude = '';
+    }
+
+  });
+
+});
+</script>
